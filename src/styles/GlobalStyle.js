@@ -37,6 +37,7 @@ ${variables}
   body{
     color:var(--white);
     font-family: 'Circular Std';
+    background-color: #121316;
   }
   .bg-1{
     height: 99.5vh;
