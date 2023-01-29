@@ -6,12 +6,17 @@ const Wrapper = styled.section`
   height: 99.5vh;
   width: 100%;
   min-height: 600px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:2rem;
+  
 `;
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Wrapper></Wrapper>
+      <Wrapper>hello</Wrapper>
     </>
   );
 }

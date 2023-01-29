@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Circular Std';
+    src: url('./fonts/CircularStd-Book.otf') format('opentype');
+}
+body{
+    font-size: 4rem;
+    /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+    font-family: 'Circular Std';
+}
