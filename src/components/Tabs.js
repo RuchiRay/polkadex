@@ -86,7 +86,7 @@ const SubText = styled.div`
   color: gray;
 `;
 const IndicatorBorder = styled.div`
-  width: 200px;
+  width: ${props=>props.search?'296px':'200px'};
   height: 80px;
   background: radial-gradient(
     100% 1891.92% at 18.26% 0%,
@@ -98,21 +98,21 @@ const IndicatorBorder = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  /* left:${(props) => props.pos}; */
-  /* transition: all 400ms linear; */
+ 
 `;
 const IndicatorBg = styled.div`
-  width: 196px;
+  width: ${props=>props.search?'293px':'196px'};
   height: 77px;
   border-radius: 25px;
   background: black;
 `;
 export const Tabs = () => {
-  const [activate, setActivate] = useState(true);
+  const [activate, setActivate] = useState(false);
   const [tabOpen, setTabOpen] = useState("0");
+  const [tabId, setTabId] = useState(1);
   const tabs = [
     {
-      id: 1,
+      id: 0,
       content: (
         <SingleTab indicator>
           <SubText>Any Token</SubText>
@@ -121,7 +121,7 @@ export const Tabs = () => {
       ),
     },
     {
-      id: 2,
+      id: 1,
       content: (
         <SingleTab indicator>
           <SubText>Any chain</SubText>
@@ -129,35 +129,56 @@ export const Tabs = () => {
         </SingleTab>
       ),
     },
+    {
+      id: 2,
+      content: (
+        <SearchTab search >
+          <SingleTab>
+           <SubText>Any amount</SubText>
+            <p>Filter by amount</p>
+          </SingleTab>
+          <SearchIcon>
+            <FiSearch />
+          </SearchIcon>
+        </SearchTab>
+      ),
+    },
   ];
-  const handleTabs = (val) => {
+  const handleTabs = (val, id) => {
+    console.log(id);
+    if(!activate)
+    setActivate(true)
     setTabOpen(val);
+    setTabId(id);
   };
+  console.log(activate);
   return (
     <TabBorder activate={activate}>
       <TabBg>
         <TabWrapper>
-          <SingleTab onClick={() => handleTabs("0%")}>
+          <SingleTab onClick={() => handleTabs("0%", 0)}>
             {activate ? <SubText>Any Token</SubText> : ""}
             <p>{activate ? "Choose token" : "Any token"}</p>
           </SingleTab>
           <IndicatorBorder
             as={motion.div}
-            animate={{ x: tabOpen }}
+            animate={{ x: tabOpen ,display:activate?'flex':'none'}}
             transition={{ duration: 0.5 }}
+            search ={tabId===2?'true':null}
+            // display={activate?'flex':'none'}
           >
             <div>
-              <IndicatorBg>{tabs[0].content}</IndicatorBg>
+              <IndicatorBg  search ={tabId===2?"true":null}>{tabs[tabId].content}</IndicatorBg>
             </div>
           </IndicatorBorder>
 
           <TabLine></TabLine>
-          <SingleTab onClick={() => handleTabs("200px")}>
+          <SingleTab onClick={() => handleTabs("200px", 1)}>
             {activate ? <SubText>Any Chain</SubText> : ""}
             <p>{activate ? "Choose chain" : "Any chain"}</p>
           </SingleTab>
           <TabLine></TabLine>
-          <SearchTab onClick={() => handleTabs("400px")}>
+          <SearchTab onClick={() => handleTabs("400px", 2)}>
             <SingleTab>
               {activate ? <SubText>Any amount</SubText> : ""}
               <p>{activate ? "Filter by amount" : "Any amount"}</p>
