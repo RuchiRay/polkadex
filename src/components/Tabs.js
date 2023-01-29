@@ -134,12 +134,13 @@ export const Tabs = ({ activate, setActivate }) => {
     {
       id: 2,
       content: (
-        <SearchTab search>
-          <SingleTab>
-            <SubText>Any amount</SubText>
-            <p>Filter by amount</p>
-          </SingleTab>
-          <SearchIcon
+        <motion.div initial={{ opacity: 0 }} animate={{opacity:1}} transition={{ delay: 0.1 }}>
+          <SearchTab search>
+            <SingleTab>
+              <SubText>Any amount</SubText>
+              <p>Filter by amount</p>
+            </SingleTab>
+            <SearchIcon
               bg={activate ? "true" : null}
               as={motion.div}
               animate={{ width: activate ? "140px" : "60px" }}
@@ -147,7 +148,8 @@ export const Tabs = ({ activate, setActivate }) => {
               <FiSearch />
               <SearchText>{activate ? "Search" : ""}</SearchText>
             </SearchIcon>
-        </SearchTab>
+          </SearchTab>
+        </motion.div>
       ),
     },
   ];
@@ -162,13 +164,13 @@ export const Tabs = ({ activate, setActivate }) => {
     <TabBorder
       as={motion.div}
       animate={{ width: activate ? "785px" : "700px" }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.3 }}
       activate={activate ? "true" : null}
     >
       <TabBg
         as={motion.div}
         animate={{ width: activate ? "780px" : "696px" }}
-        transition={{ duration: 0.7 }}
+        transition={{ duration: 0.3 }}
       >
         <TabWrapper>
           <SingleTab onClick={() => handleTabs("0%", 0)}>
