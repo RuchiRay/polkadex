@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 const TabBorder = styled.div`
   height: 80px;
   position: absolute;
+  z-index: 3;
   bottom: 5%;
   left: 50%;
   transform: translateX(-50%);

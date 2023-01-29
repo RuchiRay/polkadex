@@ -1,10 +1,14 @@
 import bg from "./bg.png";
+import bg1 from "./bg1.jpg";
 import styled from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
 import { Tabs } from "./components/Tabs";
 import { useState } from "react";
+import { motion } from "framer-motion";
+
 const Wrapper = styled.section`
-  background: url(${bg}) no-repeat center 115% / cover;
+  background:${(props)=>props.changeBg?`url(${bg1}) no-repeat center 115% / cover`:`url(${bg}) no-repeat center 115% / cover`};
+  /* background: url(${bg}) no-repeat center 115% / cover; */
   height: 99.5vh;
   width: 100%;
   min-height: 666px;
@@ -15,6 +19,15 @@ const Wrapper = styled.section`
   flex-direction: column;
   align-items: center;
 `;
+const AbsoluteWrapper = styled.div`
+position: absolute;
+top:0;
+left:0;
+width: 100%;
+height: 100%;
+background-color: rgba(0,0,0,0.5);
+z-index: 2;
+`
 const Text = styled.span`
   font-size: 1.8rem;
   font-weight: 700;
@@ -25,12 +38,12 @@ const PinkDot = styled(Text)`
 const Headline = styled.div`
   text-align: center;
   position: absolute;
-  top: 30%;
   font-size: 50px;
   font-weight: 700;
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 1;
   /* transform: translateY(50%); */
 `;
 const SubText = styled.p`
@@ -40,19 +53,24 @@ const SubText = styled.p`
   margin-top: 10px;
 `;
 function App() {
-  const [changeBg, setChangeBg] = useState(false)
   const [activate, setActivate] = useState(false);
 
   return (
     <>
       <GlobalStyle />
-      <Wrapper changeBg>
+      <Wrapper changeBg={activate?'true':null}>
         <div>
           <Text>Challenge</Text>
           <PinkDot>.</PinkDot>
         </div>
-
-        <Headline>
+        {
+          activate?<AbsoluteWrapper></AbsoluteWrapper>:""
+        }
+        <Headline
+          as={motion.div}
+          animate={{ top: activate ? "20%" : "30%" }}
+          transition={{ duration: 0.3 }}
+        >
           <p>What are you capable of?</p>
           <SubText>
             Do not underestimate yourselves. You are more capable than what you
