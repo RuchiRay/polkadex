@@ -41,6 +41,8 @@ const SubText = styled.p`
 `;
 function App() {
   const [changeBg, setChangeBg] = useState(false)
+  const [activate, setActivate] = useState(false);
+
   return (
     <>
       <GlobalStyle />
@@ -57,7 +59,7 @@ function App() {
             think your are capable of.
           </SubText>
         </Headline>
-        <Tabs />
+        <Tabs activate={activate} setActivate={setActivate} />
       </Wrapper>
     </>
   );

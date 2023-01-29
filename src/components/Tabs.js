@@ -4,7 +4,6 @@ import { FiSearch } from "react-icons/fi";
 import { useState } from "react";
 import { motion } from "framer-motion";
 const TabBorder = styled.div`
-  width: 700px;
   height: 80px;
   position: absolute;
   bottom: 5%;
@@ -21,7 +20,6 @@ const TabBorder = styled.div`
   justify-content: center;
 `;
 const TabBg = styled.div`
-  width: 696px;
   height: 77px;
   border-radius: 25px;
 
@@ -53,7 +51,8 @@ const SearchTab = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 296px;
+  /* width: 296px; */
+  width: 100%;
   padding-right: 10px;
 `;
 const SingleTab = styled.div`
@@ -66,15 +65,20 @@ const SingleTab = styled.div`
   width: ${(props) => (props.indicator ? "196px" : "200px")};
   padding-left: 25px;
   height: 77px;
+  flex-shrink: 0;
 `;
 const SearchIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
   height: 60px;
-  background-color: rgba(139, 161, 190, 0.2);
+  background-color: ${(props) =>
+    props.bg ? "#e6007a" : "rgba(139, 161, 190, 0.2)"};
   border-radius: 20px;
+`;
+const SearchText = styled.p`
+  font-size: 18px;
+  margin-left: 10px;
 `;
 const TabLine = styled.div`
   background-color: rgba(139, 161, 190, 0.05);
@@ -86,7 +90,7 @@ const SubText = styled.div`
   color: gray;
 `;
 const IndicatorBorder = styled.div`
-  width: ${props=>props.search?'296px':'200px'};
+  width: ${(props) => (props.search ? "49%" : "200px")};
   height: 80px;
   background: radial-gradient(
     100% 1891.92% at 18.26% 0%,
@@ -98,16 +102,14 @@ const IndicatorBorder = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
- 
 `;
 const IndicatorBg = styled.div`
-  width: ${props=>props.search?'293px':'196px'};
+  width: ${(props) => (props.search ? "99%" : "196px")};
   height: 77px;
   border-radius: 25px;
   background: black;
 `;
-export const Tabs = () => {
-  const [activate, setActivate] = useState(false);
+export const Tabs = ({ activate, setActivate }) => {
   const [tabOpen, setTabOpen] = useState("0");
   const [tabId, setTabId] = useState(1);
   const tabs = [
@@ -132,29 +134,42 @@ export const Tabs = () => {
     {
       id: 2,
       content: (
-        <SearchTab search >
+        <SearchTab search>
           <SingleTab>
-           <SubText>Any amount</SubText>
+            <SubText>Any amount</SubText>
             <p>Filter by amount</p>
           </SingleTab>
-          <SearchIcon>
-            <FiSearch />
-          </SearchIcon>
+          <SearchIcon
+              bg={activate ? "true" : null}
+              as={motion.div}
+              animate={{ width: activate ? "140px" : "60px" }}
+            >
+              <FiSearch />
+              <SearchText>{activate ? "Search" : ""}</SearchText>
+            </SearchIcon>
         </SearchTab>
       ),
     },
   ];
   const handleTabs = (val, id) => {
     console.log(id);
-    if(!activate)
-    setActivate(true)
+    if (!activate) setActivate(true);
     setTabOpen(val);
     setTabId(id);
   };
   console.log(activate);
   return (
-    <TabBorder activate={activate}>
-      <TabBg>
+    <TabBorder
+      as={motion.div}
+      animate={{ width: activate ? "785px" : "700px" }}
+      transition={{ duration: 0.5 }}
+      activate={activate ? "true" : null}
+    >
+      <TabBg
+        as={motion.div}
+        animate={{ width: activate ? "780px" : "696px" }}
+        transition={{ duration: 0.7 }}
+      >
         <TabWrapper>
           <SingleTab onClick={() => handleTabs("0%", 0)}>
             {activate ? <SubText>Any Token</SubText> : ""}
@@ -162,14 +177,17 @@ export const Tabs = () => {
           </SingleTab>
           <IndicatorBorder
             as={motion.div}
-            animate={{ x: tabOpen ,display:activate?'flex':'none'}}
-            transition={{ duration: 0.5 }}
-            search ={tabId===2?'true':null}
+            animate={{ x: tabOpen, display: activate ? "flex" : "none" }}
+            transition={{ duration: 0.3 }}
+            search={tabId === 2 ? "true" : null}
             // display={activate?'flex':'none'}
           >
-            <div>
-              <IndicatorBg  search ={tabId===2?"true":null}>{tabs[tabId].content}</IndicatorBg>
-            </div>
+            <IndicatorBg
+              className="ind-bg"
+              search={tabId === 2 ? "true" : null}
+            >
+              {tabs[tabId].content}
+            </IndicatorBg>
           </IndicatorBorder>
 
           <TabLine></TabLine>
@@ -178,13 +196,19 @@ export const Tabs = () => {
             <p>{activate ? "Choose chain" : "Any chain"}</p>
           </SingleTab>
           <TabLine></TabLine>
+
           <SearchTab onClick={() => handleTabs("400px", 2)}>
             <SingleTab>
               {activate ? <SubText>Any amount</SubText> : ""}
               <p>{activate ? "Filter by amount" : "Any amount"}</p>
             </SingleTab>
-            <SearchIcon>
+            <SearchIcon
+              bg={activate ? "true" : null}
+              as={motion.div}
+              animate={{ width: activate ? "140px" : "60px" }}
+            >
               <FiSearch />
+              <SearchText>{activate ? "Search" : ""}</SearchText>
             </SearchIcon>
           </SearchTab>
         </TabWrapper>
