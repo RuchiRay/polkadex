@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FiSearch } from "react-icons/fi";
 import { useState } from "react";
-
+import { motion } from "framer-motion";
 const TabBorder = styled.div`
   width: 700px;
   height: 80px;
@@ -63,7 +63,7 @@ const SingleTab = styled.div`
   justify-content: center;
   flex-direction: column;
   /* align-items: center; */
-  width: ${props => props.indicator ? "196px" : "200px"};
+  width: ${(props) => (props.indicator ? "196px" : "200px")};
   padding-left: 25px;
   height: 77px;
 `;
@@ -98,8 +98,8 @@ const IndicatorBorder = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  left:${props => props.pos};
-  transition: all 400ms linear;
+  /* left:${(props) => props.pos}; */
+  /* transition: all 400ms linear; */
 `;
 const IndicatorBg = styled.div`
   width: 196px;
@@ -109,51 +109,55 @@ const IndicatorBg = styled.div`
 `;
 export const Tabs = () => {
   const [activate, setActivate] = useState(true);
-const [tabOpen, setTabOpen] = useState('0%')
+  const [tabOpen, setTabOpen] = useState("0");
   const tabs = [
     {
       id: 1,
       content: (
-          <SingleTab indicator>
-           <SubText>Any Token</SubText> 
-            <p>Choose token</p>
-          </SingleTab>
+        <SingleTab indicator>
+          <SubText>Any Token</SubText>
+          <p>Choose token</p>
+        </SingleTab>
       ),
     },
     {
       id: 2,
       content: (
-          <SingleTab indicator>
-           <SubText>Any chain</SubText> 
-            <p>Choose chain</p>
-          </SingleTab>
+        <SingleTab indicator>
+          <SubText>Any chain</SubText>
+          <p>Choose chain</p>
+        </SingleTab>
       ),
     },
   ];
-  const handleTabs = (val)=>{
-   setTabOpen(val)
-  }
+  const handleTabs = (val) => {
+    setTabOpen(val);
+  };
   return (
     <TabBorder activate={activate}>
       <TabBg>
         <TabWrapper>
-          <SingleTab onClick={()=>handleTabs('0%')}>
+          <SingleTab onClick={() => handleTabs("0%")}>
             {activate ? <SubText>Any Token</SubText> : ""}
             <p>{activate ? "Choose token" : "Any token"}</p>
           </SingleTab>
-          <IndicatorBorder pos={tabOpen}>
+          <IndicatorBorder
+            as={motion.div}
+            animate={{ x: tabOpen }}
+            transition={{ duration: 0.5 }}
+          >
             <div>
               <IndicatorBg>{tabs[0].content}</IndicatorBg>
             </div>
           </IndicatorBorder>
 
           <TabLine></TabLine>
-          <SingleTab onClick={()=>handleTabs('29%')}>
+          <SingleTab onClick={() => handleTabs("200px")}>
             {activate ? <SubText>Any Chain</SubText> : ""}
             <p>{activate ? "Choose chain" : "Any chain"}</p>
           </SingleTab>
           <TabLine></TabLine>
-          <SearchTab onClick={()=>handleTabs('55%')}>
+          <SearchTab onClick={() => handleTabs("400px")}>
             <SingleTab>
               {activate ? <SubText>Any amount</SubText> : ""}
               <p>{activate ? "Filter by amount" : "Any amount"}</p>
