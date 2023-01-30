@@ -8,7 +8,7 @@ import { ModalAmount } from "./ModalAmount";
 const Wrapper = styled.div`
   position: absolute;
   bottom: 20%;
-  width: 386px;
+  /* width: 386px; */
   height: 288px;
   border-radius: 25px;
   background-color: white;
@@ -23,26 +23,31 @@ top: 45%;
 `
 export const Modal = ({ activeModalId, activate, refContainer, refTab ,left}) => {
 
-
+const [width, setWidth] = useState('386px')
   const modals = [
     {
       id: 0,
       content: <ModalToken />,
+      width:'386px'
     },
     {
       id: 1,
       content: <ModalChain />,
+      width:'435px'
+
     },
     {
       id: 2,
       content: <ModalAmount />,
+      width:'435px'
+
     },
   ];
   return (
     <OuterWrapper>
       <Wrapper
         as={motion.div}
-        animate={{ left: left, display: activate ? "block" : "none" }}
+        animate={{ left: left,width:modals[activeModalId].width, display: activate ? "block" : "none" }}
         transition={{ duration: 0.3 }}
       >
         {modals[activeModalId].content}

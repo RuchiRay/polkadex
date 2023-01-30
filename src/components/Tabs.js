@@ -202,13 +202,13 @@ export const Tabs = ({ activate, setActivate,setActiveModalId ,refTab,setLeft}) 
           </IndicatorBorder>
 
           <TabLine></TabLine>
-          <SingleTab onClick={() => handleTabs("200px", 1)}>
+          <SingleTab onClick={() => handleTabs("200px", 1,'150px')}>
             {activate ? <SubText>Any Chain</SubText> : ""}
             <p>{activate ? "Choose chain" : "Any chain"}</p>
           </SingleTab>
           <TabLine></TabLine>
 
-          <SearchTab onClick={() => handleTabs("400px", 2,'480px')}>
+          <SearchTab onClick={() => handleTabs("400px", 2,'450px')}>
             <SingleTab>
               {activate ? <SubText>Any amount</SubText> : ""}
               <p>{activate ? "Filter by amount" : "Any amount"}</p>
