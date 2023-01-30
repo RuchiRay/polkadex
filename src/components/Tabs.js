@@ -76,6 +76,7 @@ const SearchIcon = styled.div`
   background-color: ${(props) =>
     props.bg ? "#e6007a" : "rgba(139, 161, 190, 0.2)"};
   border-radius: 20px;
+  cursor: pointer;
 `;
 const SearchText = styled.p`
   font-size: 18px;
@@ -113,7 +114,10 @@ const IndicatorBg = styled.div`
 export const Tabs = ({ activate, setActivate,setActiveModalId ,refTab,setLeft}) => {
   const [tabOpen, setTabOpen] = useState("0");
   const [tabId, setTabId] = useState(1);
- 
+  const searchIconHandle = ()=>{
+    console.log('click');
+    setActivate(false)
+  }
   const tabs = [
     {
       id: 0,
@@ -146,6 +150,7 @@ export const Tabs = ({ activate, setActivate,setActiveModalId ,refTab,setLeft}) 
               bg={activate ? "true" : null}
               as={motion.div}
               animate={{ width: activate ? "140px" : "60px" }}
+              onClick={searchIconHandle}
             >
               <FiSearch />
               <SearchText>{activate ? "Search" : ""}</SearchText>
@@ -167,6 +172,7 @@ export const Tabs = ({ activate, setActivate,setActiveModalId ,refTab,setLeft}) 
     setLeft(val)
   };
   console.log(activate);
+  
   return (
     <TabBorder
       as={motion.div}
@@ -217,6 +223,7 @@ export const Tabs = ({ activate, setActivate,setActiveModalId ,refTab,setLeft}) 
               bg={activate ? "true" : null}
               as={motion.div}
               animate={{ width: activate ? "140px" : "60px" }}
+             
             >
               <FiSearch />
               <SearchText>{activate ? "Search" : ""}</SearchText>
