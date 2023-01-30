@@ -7,7 +7,7 @@ import { ModalToken } from "./ModalToken";
 import { ModalAmount } from "./ModalAmount";
 const Wrapper = styled.div`
   position: absolute;
-  bottom: 20%;
+  bottom: 40%;
   /* width: 386px; */
   height: 288px;
   border-radius: 25px;

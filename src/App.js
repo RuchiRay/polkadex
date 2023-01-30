@@ -3,10 +3,11 @@ import bg1 from "./bg1.jpg";
 import styled from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
 import { Tabs } from "./components/Tabs";
-import { useState,useRef } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Modal } from "./components/Modal";
-
+// import ClickAwayListener from "react-click-away-listener";
+import { ClickAwayListener } from "@mui/base";
 const Wrapper = styled.section`
   background: ${(props) =>
     props.changeBg
@@ -56,17 +57,24 @@ const SubText = styled.p`
   width: 500px;
   margin-top: 10px;
 `;
+const Absolute = styled.div`
+  position: absolute;
+  top: 58%;
+`
 function App() {
   const [activate, setActivate] = useState(false);
   const [activeModalId, setActiveModalId] = useState(0);
   const refContainer = useRef();
   const refTab = useRef();
   const [left, setLeft] = useState("0%");
-
+  const handleClickAway = () => {
+    console.log("Maybe close the popup");
+    setActivate(false);
+  };
   return (
     <>
       <GlobalStyle />
-      <Wrapper  ref={refContainer} changeBg={activate ? "true" : null}>
+      <Wrapper ref={refContainer} changeBg={activate ? "true" : null}>
         <div>
           <Text>Challenge</Text>
           <PinkDot>.</PinkDot>
@@ -83,22 +91,26 @@ function App() {
             think your are capable of.
           </SubText>
         </Headline>
-        <Tabs
-          activeModalId={activeModalId}
-          setActiveModalId={setActiveModalId}
-          activate={activate}
-          setActivate={setActivate}
-          refTab={refTab}
-           setLeft={setLeft}
-        />
-        <Modal
-          activeModalId={activeModalId}
-          setActiveModalId={setActiveModalId}
-          activate={activate}
-          refContainer={refContainer}
-          refTab={refTab}
-          left={left}
-        />
+        <ClickAwayListener onClickAway={handleClickAway}>
+          <Absolute>
+            <Tabs
+              activeModalId={activeModalId}
+              setActiveModalId={setActiveModalId}
+              activate={activate}
+              setActivate={setActivate}
+              refTab={refTab}
+              setLeft={setLeft}
+            />
+            <Modal
+              activeModalId={activeModalId}
+              setActiveModalId={setActiveModalId}
+              activate={activate}
+              refContainer={refContainer}
+              refTab={refTab}
+              left={left}
+            />
+          </Absolute>
+        </ClickAwayListener>
       </Wrapper>
     </>
   );
