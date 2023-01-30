@@ -6,14 +6,12 @@ import { Tabs } from "./components/Tabs";
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Modal } from "./components/Modal";
-// import ClickAwayListener from "react-click-away-listener";
 import { ClickAwayListener } from "@mui/base";
 const Wrapper = styled.section`
   background: ${(props) =>
     props.changeBg
       ? `url(${bg1}) no-repeat center 115% / cover`
       : `url(${bg}) no-repeat center 115% / cover`};
-  /* background: url(${bg}) no-repeat center 115% / cover; */
   height: 99.5vh;
   width: 100%;
   min-height: 700px;

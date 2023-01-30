@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { ModalChain } from "./ModalChain";
@@ -23,7 +22,6 @@ top: 45%;
 `
 export const Modal = ({ activeModalId, activate, refContainer, refTab ,left}) => {
 
-const [width, setWidth] = useState('386px')
   const modals = [
     {
       id: 0,

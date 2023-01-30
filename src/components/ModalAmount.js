@@ -11,11 +11,7 @@ const BlackText = styled.p`
 const BlackTextLarge = styled(BlackText)`
   font-size: 22px;
 `;
-const Flex = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-`;
+
 const FlexRow = styled.div`
   display: flex;
   align-items: center;

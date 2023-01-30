@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FiSearch } from "react-icons/fi";
-import { useState ,useRef} from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 const TabBorder = styled.div`
   height: 80px;
