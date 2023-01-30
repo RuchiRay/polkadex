@@ -63,7 +63,7 @@ export const ModalToken = () => {
         {tokens.map((item) => {
           return (
             <TokenWrapper
-              border={item.id === tokenSelected ? "#1C1C26" : "#828282"}
+              border={item.id === tokenSelected ? "#1C1C26" : "rgba(130, 130, 130, 0.5)"}
               onClick={() => setTokenSelected(item.id)}
               key={item.id}
             >

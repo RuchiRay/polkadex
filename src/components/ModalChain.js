@@ -69,7 +69,7 @@ export const ModalChain = () => {
         {chains.map((item) => {
           return (
             <ChainWrapper
-              border={item.id === chainSelected ? "#1C1C26" : "#828282"}
+              border={item.id === chainSelected ? "#1C1C26" : "rgba(130, 130, 130, 0.5)"}
               onClick={() => setChainSelected(item.id)}
               key={item.id}
             >

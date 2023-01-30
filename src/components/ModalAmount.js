@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, { useState } from "react";
 import styled from "styled-components";
 const Wrapper = styled.div`
   width: 100%;
@@ -26,7 +26,6 @@ const AmountWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  
 `;
 const Button = styled.button`
   width: 36px;
@@ -35,35 +34,36 @@ const Button = styled.button`
   border-radius: 9px;
   border: none;
   font-size: 1.2rem;
-`
+`;
 const Line = styled.div`
-  height:1px;
+  height: 1px;
   background-color: #828282;
   width: 100%;
-`
-
+`;
 
 export const ModalAmount = () => {
-  const [max, setMax] = useState(10)
-  const [min, setMin] = useState(1)
+  const [max, setMax] = useState(10);
+  const [min, setMin] = useState(1);
   return (
     <Wrapper>
-    <BlackText>Filter by amount</BlackText>
-     <AmountWrapper>
-      <BlackTextLarge>Max amount</BlackTextLarge>
-      <FlexRow>
-        <Button onClick={()=>setMax((prev)=>prev-1)}>-</Button>
-        <BlackText>{max}</BlackText>
-        <Button onClick={()=>setMax((prev)=>prev+1)}>+</Button>
-      </FlexRow>
-     </AmountWrapper>
-     <Line></Line>
-     <AmountWrapper><BlackTextLarge>Max amount</BlackTextLarge>
-      <FlexRow>
-        <Button onClick={()=>setMin((prev)=>prev-1)}>-</Button>
-        <BlackText>{min}</BlackText>
-        <Button onClick={()=>setMin((prev)=>prev+1)}>+</Button>
-      </FlexRow></AmountWrapper>
-  </Wrapper>
-  )
-}
+      <BlackText>Filter by amount</BlackText>
+      <AmountWrapper>
+        <BlackTextLarge>Max amount</BlackTextLarge>
+        <FlexRow>
+          <Button onClick={() => setMax((prev) => prev - 1)}>-</Button>
+          <BlackText>{max}</BlackText>
+          <Button onClick={() => setMax((prev) => prev + 1)}>+</Button>
+        </FlexRow>
+      </AmountWrapper>
+      <Line></Line>
+      <AmountWrapper>
+        <BlackTextLarge>Max amount</BlackTextLarge>
+        <FlexRow>
+          <Button onClick={() => setMin((prev) => prev - 1)}>-</Button>
+          <BlackText>{min}</BlackText>
+          <Button onClick={() => setMin((prev) => prev + 1)}>+</Button>
+        </FlexRow>
+      </AmountWrapper>
+    </Wrapper>
+  );
+};
