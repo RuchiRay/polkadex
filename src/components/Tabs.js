@@ -226,7 +226,10 @@ export const Tabs = ({ activate, setActivate,setActiveModalId ,refTab,setLeft}) 
              
             >
               <FiSearch />
-              <SearchText>{activate ? "Search" : ""}</SearchText>
+              {
+                activate? <SearchText>Search</SearchText>:''
+              }
+             
             </SearchIcon>
           </SearchTab>
         </TabWrapper>
