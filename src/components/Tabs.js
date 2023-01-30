@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FiSearch } from "react-icons/fi";
-import { useState } from "react";
+import { useState ,useRef} from "react";
 import { motion } from "framer-motion";
 const TabBorder = styled.div`
   height: 80px;
@@ -110,9 +110,10 @@ const IndicatorBg = styled.div`
   border-radius: 25px;
   background: black;
 `;
-export const Tabs = ({ activate, setActivate }) => {
+export const Tabs = ({ activate, setActivate,setActiveModalId ,refTab,setLeft}) => {
   const [tabOpen, setTabOpen] = useState("0");
   const [tabId, setTabId] = useState(1);
+ 
   const tabs = [
     {
       id: 0,
@@ -154,11 +155,16 @@ export const Tabs = ({ activate, setActivate }) => {
       ),
     },
   ];
-  const handleTabs = (val, id) => {
+  const handleTabs = (val, id,modalVal) => {
     console.log(id);
     if (!activate) setActivate(true);
     setTabOpen(val);
     setTabId(id);
+    setActiveModalId(id)
+    if(modalVal)
+    setLeft(modalVal)
+    else
+    setLeft(val)
   };
   console.log(activate);
   return (
@@ -167,6 +173,7 @@ export const Tabs = ({ activate, setActivate }) => {
       animate={{ width: activate ? "785px" : "700px" }}
       transition={{ duration: 0.3 }}
       activate={activate ? "true" : null}
+      ref={refTab}
     >
       <TabBg
         as={motion.div}
@@ -178,6 +185,7 @@ export const Tabs = ({ activate, setActivate }) => {
             {activate ? <SubText>Any Token</SubText> : ""}
             <p>{activate ? "Choose token" : "Any token"}</p>
           </SingleTab>
+
           <IndicatorBorder
             as={motion.div}
             animate={{ x: tabOpen, display: activate ? "flex" : "none" }}
@@ -200,7 +208,7 @@ export const Tabs = ({ activate, setActivate }) => {
           </SingleTab>
           <TabLine></TabLine>
 
-          <SearchTab onClick={() => handleTabs("400px", 2)}>
+          <SearchTab onClick={() => handleTabs("400px", 2,'480px')}>
             <SingleTab>
               {activate ? <SubText>Any amount</SubText> : ""}
               <p>{activate ? "Filter by amount" : "Any amount"}</p>

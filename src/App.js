@@ -3,15 +3,19 @@ import bg1 from "./bg1.jpg";
 import styled from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
 import { Tabs } from "./components/Tabs";
-import { useState } from "react";
+import { useState,useRef } from "react";
 import { motion } from "framer-motion";
+import { Modal } from "./components/Modal";
 
 const Wrapper = styled.section`
-  background:${(props)=>props.changeBg?`url(${bg1}) no-repeat center 115% / cover`:`url(${bg}) no-repeat center 115% / cover`};
+  background: ${(props) =>
+    props.changeBg
+      ? `url(${bg1}) no-repeat center 115% / cover`
+      : `url(${bg}) no-repeat center 115% / cover`};
   /* background: url(${bg}) no-repeat center 115% / cover; */
   height: 99.5vh;
   width: 100%;
-  min-height: 666px;
+  min-height: 700px;
   display: flex;
   padding: 40px;
   font-size: 2rem;
@@ -20,14 +24,14 @@ const Wrapper = styled.section`
   align-items: center;
 `;
 const AbsoluteWrapper = styled.div`
-position: absolute;
-top:0;
-left:0;
-width: 100%;
-height: 100%;
-background-color: rgba(0,0,0,0.5);
-z-index: 2;
-`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+`;
 const Text = styled.span`
   font-size: 1.8rem;
   font-weight: 700;
@@ -54,18 +58,20 @@ const SubText = styled.p`
 `;
 function App() {
   const [activate, setActivate] = useState(false);
+  const [activeModalId, setActiveModalId] = useState(0);
+  const refContainer = useRef();
+  const refTab = useRef();
+  const [left, setLeft] = useState("0%");
 
   return (
     <>
       <GlobalStyle />
-      <Wrapper changeBg={activate?'true':null}>
+      <Wrapper  ref={refContainer} changeBg={activate ? "true" : null}>
         <div>
           <Text>Challenge</Text>
           <PinkDot>.</PinkDot>
         </div>
-        {
-          activate?<AbsoluteWrapper></AbsoluteWrapper>:""
-        }
+        {activate ? <AbsoluteWrapper></AbsoluteWrapper> : ""}
         <Headline
           as={motion.div}
           animate={{ top: activate ? "20%" : "30%" }}
@@ -77,7 +83,22 @@ function App() {
             think your are capable of.
           </SubText>
         </Headline>
-        <Tabs activate={activate} setActivate={setActivate} />
+        <Tabs
+          activeModalId={activeModalId}
+          setActiveModalId={setActiveModalId}
+          activate={activate}
+          setActivate={setActivate}
+          refTab={refTab}
+           setLeft={setLeft}
+        />
+        <Modal
+          activeModalId={activeModalId}
+          setActiveModalId={setActiveModalId}
+          activate={activate}
+          refContainer={refContainer}
+          refTab={refTab}
+          left={left}
+        />
       </Wrapper>
     </>
   );
